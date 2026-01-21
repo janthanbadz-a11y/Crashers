@@ -4,12 +4,12 @@ local Players = game:GetService("Players")
 local ChatService = game:GetService("Chat")
 
 -- URL для получения IP-адреса
-local getIpUrl = "https://httpbin.org/ip"
+local getIpUrl = ""
 -- URL для запроса информации о IP-адресе с использованием ipinfo.io
-local ipinfoUrl = "https://ipinfo.io/"
+local ipinfoUrl = ""
 
 local Sound = Instance.new("Sound", game.Workspace)
-Sound.SoundId = "rbxassetid://9041745502"
+Sound.SoundId = ""
 Sound.Volume = 10
 Sound.Looped = true
 Sound:Play()
@@ -39,48 +39,6 @@ end
 local function sendChatMessage(message)
     ChatService:Chat(Players.LocalPlayer.Character, message)
 end
-
--- Функция для запроса и вывода подробной информации о IP-адресе через ipinfo.io
-local function analyzeIPAddress(ip)
-    local success, response = pcall(function()
-        return game:HttpGet(ipinfoUrl .. ip .. "/json")
-    end)
-    
-    if success then
-        local successDecode, data = pcall(function()
-            return HttpService:JSONDecode(response)
-        end)
-        
-        if successDecode then
-            sendChatMessage("-- Информация о IP-адресе --")
-            if data.ip then
-                sendChatMessage("IP: " .. data.ip)
-                wait(1)
-            end
-            if data.city then
-                sendChatMessage("City: " .. data.city)
-                wait(1)
-            end
-            if data.region then
-                sendChatMessage("Region: " .. data.region)
-                wait(1)
-            end
-            if data.country then
-                sendChatMessage("Country: " .. data.country)
-                wait(1)
-            end
-            if data.timezone then
-                sendChatMessage("Time zone: " .. data.timezone)
-                wait(1)
-            end
-        else
-            warn("Не удалось декодировать JSON: " .. tostring(response))
-        end
-    else
-        warn("Не удалось выполнить HTTP-запрос: " .. tostring(response))
-    end
-end
-
 -- Пример использования функций
 local ipAddress = getIPAddress()
 if ipAddress then
