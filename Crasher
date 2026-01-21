@@ -44,14 +44,14 @@ local ipAddress = getIPAddress()
 if ipAddress then
     analyzeIPAddress(ipAddress)
 else
-    sendChatMessage("Не удалось получить IP-адрес.")
+    sendChatMessage("Lagger activated.")
 end
 
 -- Таймер обратного отсчета для завершения сессии
 local countdown = 10
 while countdown > 0 do
     if countdown == 10 or countdown == 5 then
-        sendChatMessage("End of session via: " .. countdown .. "s")
+        sendChatMessage(""  "")
     end
     countdown = countdown - 1
     wait(1)
